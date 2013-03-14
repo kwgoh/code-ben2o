@@ -30,7 +30,11 @@
       
       //This controller controls the application
       function BackendController($scope,$resource){
-      
+      	
+        $scope.name = "Brandon Goh";
+        $scope.date = new Date();
+        $scope.points = 9;
+        
         $scope.gaEvent = function($event){
           $scope.clicked = $event.target.name;
           //Call your own backend to log an event.
@@ -44,7 +48,7 @@
         $scope.showdetails = false;
         
         //Change your API key here! Refer to the notes above
-        $scope.apikey = "1234";
+        $scope.apikey = "BAKA";
         
         //Replace this url with your final URL from the SingPath API path. 
         //$scope.remote_url = "localhost:8080";
@@ -176,6 +180,19 @@
         $scope.list();         
       }
     </script>
+    <script type="text/javascript">
+      
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-38493770-1']);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+      
+    </script>    
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -203,148 +220,120 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.html">BaaS</a>
+          <a class="brand" href="index.html">Code Ben2o</a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="index.html">Overview</a></li>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Facebook Login</a></li>
+                  <li><a href="#">Google Login</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Donate</a></li>              
+              <li><a href="#">Feedback</a></li>
               <!-- <li><a href="#about">Documentation</a></li> -->
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-  
+    
     <div class="container-fluid">
-    	<div class="row">
-	    	<div class="span8 hidden-phone">
-	    		<div class="hero-unit">
-			        <h1>Backend as a Service</h1>
-			        <p>Here is a project that you can fork on Github to start prototyping your own responsive design in a public gh-pages branch or any other publicly hosted folder like your Dropbox public folder. You can start by using the provided backend-as-a-service, and then later deploy your project to Google App Engine and use your own instance of the backend-as-a-service running in the free tier of Google App Engine.</p>
-			        <p><a class="btn btn-primary btn-large" href="https://github.com/ChrisBoesch/awesome-start">Fork on GitHub &raquo;</a></p>
-			    </div>
-	    	</div>
-	    	<div class="visible-phone">
-	    		<h3 style="margin-top:0">Backend as a Service</h3>
-		    	<p>Here is a project that you can fork on Github to start prototyping your own responsive design in a public gh-pages branch or any other publicly hosted folder like your Dropbox public folder. You can start by using the provided backend-as-a-service, and then later deploy your project to Google App Engine and use your own instance of the backend-as-a-service running in the free tier of Google App Engine.</p>
-				<p><a class="btn btn-primary" href="https://github.com/ChrisBoesch/awesome-start">Fork on GitHub &raquo;</a></p>
-				<hr/>
-	    	</div>
-	    	<div class="span4">
-			    <h3>Example App</h2>
-			    <div class="input-append">
-			    	<legend>Please leave a message:</legend>
-			    	<input type="text" ng-model="item.data.message" placeholder="Hi Chris!">
-			    	<input class="btn" ng-click="add()" type="submit" name="add new item" value="Submit">
-			    </div>
-			    <ul>
-			      <li ng-repeat="entity in items.entities">
-			          {{entity.data.message}}
-			      </li>
-			    </ul>
-			    
-			    <!-- You can hide this setup code once you've configured your app -->
-			    <!-- This checkbox will hide everything in the DIV below or show it all. -->
-			    <hr>      
-			    <label class="checkbox"><input type="checkbox" ng-model="showdetails">Show Angularjs details.</label>
-			</div>
-		</div>
-	
-		<div ng-show="showdetails" class="container">
-			<h3>AngularJS Details</h3>
-			<p class="lead">Angular is used to edit any items on a remote backend using a specific apikey.</p><hr/>
-			<label>Current backend:</label><br>   
-			<select ng-model="remote_url" ng-options="item.url as item.urlName for item in backend_locations"></select>
-			<br>Base URL: {{remote_url}} <br>
-			<hr>
-			You can change this apikey to be any string so that you won't conflict with others.<br>
-			<form ng-submit="get_metadata()">
-				<div class="input-append">
-				Current API Key: <input type="text" ng-model="apikey">
-				<input type="submit" class="btn" name="get metadata" value="Get metadata">
-				</div>
-				(See what is currently stored for the apikey.)
-			</form>
-			Metadata: <pre>{{metadata}}</pre>
-			<hr>
-	   		Update the list of models for the apikey.<br>
-		    <form ng-submit="list()">  
-		      <div class="input-prepend input-append">
-			      <span class="add-on">Model: </span><input type="text" ng-model="model" placeholder="user">
-			      <input type="submit" class="btn" name="list" value="List">
-		      </div>		    
-			</form>  
-		    
-		    <hr>
-		    <!-- Here is a good place to comment out everythign above once you are configured. -->
-	    
-	    	There are {{items.entities.length}} items for {{model}}. Status: {{waiting}}
-			<div class="responsive-table">
-			<table class="table">
-			  <th ng-repeat="(key,val) in items.entities[0]">
-			      {{key}}
-			  <th>
-			  <th>Delete</th>
-			
-			  <tr ng-repeat="item in items.entities">
-			
-			    <td ng-repeat="(key,val) in item">
-			      {{val}}
-			    </td>
-			    <td>
-			      <form ng-submit="load(item['id'])" style="margin-bottom:0">
-			        <input type="submit" class="btn" name="load" value="Load">
-			      </form>
-			    </td>
-			    <td>
-			      <form ng-submit="delete(item['id'])" style="margin-bottom:0">
-			        <input type="submit" class="btn" name="delete" value="Delete">
-			      </form>
-			    </td>
-			  </tr>
-			</table></div>
-	      
-	    	<hr>
-	    	Item Data:
-			<table>
-			  <tr>
-			    <td>ID:</td>
-			    <td><input type="text" ng-model="item.id"></td>
-			  </tr>
-			  <tr>
-			    <td>Data:</td>
-			    <td><input type="text" ng-model="item.data.message"></td>
-			  </tr>
-			<!-- You could dynamically show all key-value pairs in the item.data
-			<tr ng-repeat="(key,val) in item.data">
-			  <td>{{key}}:</td> 
-			  <td><input type="text" ng-model="item.data[key]"></td>
-			</tr>
-			
-			<tr>
-			  <td><input type="text" ng-model="newItemKey" placeholder="add key here"></td>
-			  <td><input type="text" ng-model="newItemValue" placeholder="add value here"></td>
-			  <td>
-			    <form ng-submit="add_key_to_item()">
-			      <input type="submit" class="btn" value="Add key/value pair."> 
-			    </form>
-			  </td>
-			</tr>
-			-->
-			
-			</table>
-	
-		    <form ng-submit="add()">
-		      <input type="submit" class="span4 btn" name="add new item" value="Add new item (Using POST)">
-		    </form>
-		    <form ng-submit="update(item.id)">
-		      <input type="submit" class="span4 btn" value="Update item {{item.id}} (Using PUT)">
-		    </form>
-	    </div>
-	 </div>
-	 <!-- Your own HTML code would end here -->
-	 <!-- Bootstrap Javascript Files-->
-	 <script src="http://code.jquery.com/jquery-latest.js"></script>
-     <script src="js/bootstrap.min.js"></script>
-     <!-- Bootstrap Javascript Files End-->
+      <div class="row">
+        <div class="span4">
+          <h4>Welcome, {{name}}!</h4>
+          <h5>You last logged in on {{date.getDate()}}/{{date.getMonth() + 1}}/{{date.getFullYear()}}.</h5>
+          <hr>
+          <h3>Pair Program With Your Friend!</h3>
+          <div class="input-append">
+            <h4>Filter:</h4>
+            <input type="text" ng-model="item.data.message" placeholder="Name of User">
+            <input class="btn"  type="submit" name="add new item" value="Submit">
+          </div>
+          <div class="well">
+            <ul>
+              <li ng-repeat="entity in items.entities">
+                {{entity.data.message}}
+              </li>
+            </ul>
+          </div>
+          <h3>Current Points: {{points}}</h3>
+        </div>
+        <div class="span8">
+          <div class="well">
+            <div class="container-fluid">
+              <div class="tabbable">
+                <ul class="nav nav-tabs" id="codeTab">
+                  <li><a href="#Java" data-toggle="tab">Java</a></li>
+                  <li><a href="#JavaScript" data-toggle="tab">JavaScript</a></li>
+                  <li><a href="#Others" data-toggle="tab">Others</a></li>
+                </ul>
+                <div class="tab-content" id="codeTab">
+                  <div class="tab-pane active" id="Java">
+                    <div class="container-fluid">
+                      <div class="row-fluid">
+                        <div class="span6">
+                          <h4>Your code:</h4>
+                          <textarea style="width:100%; height:180px">Lorem ipsum dolor sit amet, conseteteur adipiscing elit.</textarea>
+                          
+                        </div>
+                        <div class="span6">
+                          <h4>Friend's code:</h4>
+                          <textarea style="width:100%; height:180px" disabled> Pellentesque quis neque massa. Duis nec porta quam.</textarea>
+                          
+                        </div>
+                      </div>
+                      <br>
+                      <input type="submit" class="button" value="Submit"/> 
+                      <input type="submit" class="button" value="Cancel"/>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="JavaScript">
+                    <div class="container-fluid">
+                      <div class="row-fluid">
+                        <div class="span6">
+                          <h4>Your code:</h4>
+                          <textarea style="width:100%; height:180px">Cras sollicitudin scelerisque magna sed cursus.</textarea>
+                          
+                        </div>
+                        <div class="span6">
+                          <h4>Friend's code:</h4>
+                          <textarea style="width:100%; height:180px" disabled>Ut quis sapien nec massa tempus posuere tempor quis velit.</textarea>
+                          
+                        </div>
+                      </div>
+                      <br>
+                      <input type="submit" class="button" value="Submit"/> 
+                      <input type="submit" class="button" value="Cancel"/>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="Others">
+                    <div class="container-fluid">
+                      <div class="row-fluid">
+                        <div class="span6">
+                          <h4>Your code:</h4>
+                          <textarea style="width:100%; height:180px">Donec cursus pharetra imperdiet. Morbi aliquet pretium consequat.</textarea>
+                          
+                        </div>
+                        <div class="span6">
+                          <h4>Friend's code:</h4>
+                          <textarea style="width:100%; height:180px" disabled>Duis sed odio et dolor suscipit ultrices. Aenean lorem dolor, lobortis ut luctus vel, euismod eget eros.</textarea>
+                          
+                        </div>
+                      </div>
+                      <br>
+                      <input type="submit" class="button" value="Submit"/> 
+                      <input type="submit" class="button" value="Cancel"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
